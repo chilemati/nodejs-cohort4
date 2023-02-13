@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include("./partials/head.ejs")%>
+<body class="home">
+    <%- include("./partials/nav.ejs")%>
+   <div class="container">
+    <h1>Welcome to Elite</h1>
+    <div class="blogs" >
+        <% if(Blogs.length > 0) { %>
+           <% Blogs.forEach(x=> { %>
+           <div class="ablog">
+            <h3>
+               <%= x.title %>
+            </h3>
+            <h6> Written by: <%= x.author %>
+            </h6>
+            <p>
+               <%= x.content.slice(0,60) %>...
+            </p>
+            <a href="<%= x.id %>">Read More</a>
+           </div>
+          <% }) %>
+       <% } else { %>
+            <p>Sorry, there are no Blogs to Display!</p>
+      <% } %>
+    </div>
+    
+   </div>
+<%- include("./partials/footer.ejs")%>
+</body>
+</html>

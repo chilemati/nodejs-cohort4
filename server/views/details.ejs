@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include("./partials/head.ejs")%>
+
+    <body class="home">
+        <%- include("./partials/nav.ejs")%>
+            <div class="container">
+                <h1> <%= aBlog.title %></h1>
+                <div class="img">
+                    <% if (aBlog.blogImg_url) { %>
+                        <img src="<%= aBlog.blogImg_url %>" alt="an image">
+                   <% } %> 
+                </div>
+                <h6> Written by: <%= aBlog.author %></h6>
+                <p> <%= aBlog.content %></p>
+              <div class="btn">
+                <form action="/showUpdate" method="POST">
+                    <button name="update" value="<%= aBlog._id %>" >Update Blog</button>
+                </form>
+                <form action="/delete" method="POST" class="delForm">
+                    <button name="update" value="<%= aBlog._id %>"  class="delete" >Delete Blog</button>
+                </form>
+              </div>
+               
+            </div>
+            <%- include("./partials/footer.ejs")%>
+
+            <script>
+                let del = document.querySelector('.delete');
+                let delForm = document.querySelector('.delForm');
+                 let ok = null;
+
+                delForm.addEventListener('submit', (e)=> {
+                    !ok && e.preventDefault(e);
+                });
+                del.addEventListener('click', (e)=> {
+                    let agree = confirm('Are You Sure you want to delete This Blog?');
+                    console.log(agree);
+                    let agree1 = confirm('NOTE: process can not be stopped once Started!');
+                    console.log(agree1);
+
+                    if(agree == true && agree1 == true) {
+
+                        ok=true;
+                    }
+                    console.log('ok = ', ok);
+                })
+            </script>
+            
+    </body>
+
+</html>

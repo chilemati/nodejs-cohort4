@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include("./partials/head.ejs")%>
+
+    <body class="create">
+        <%- include("./partials/nav.ejs")%>
+            <div class="container">
+                <h1>Update-Blog</h1>
+                <form action="/update" method="POST" enctype="multipart/form-data">
+                    <div class="title">
+                        <label for="">Title</label> <br> <input 
+                        type="text" 
+                        placeholder="Blog Title" 
+                        required
+                        name="title"
+                        value="<%= blog.title %>"
+                            >
+                    </div>
+                    <div class="content">
+                        <label for="">Content</label> <br> <textarea 
+                        placeholder="Blog Content"
+                         required
+                        name="content"
+                            > <%= blog.content %>  </textarea>
+                    </div>
+                    <div class="image">
+                        <div>
+                            <label for="">Image</label>
+                            <input type="file" name="image">
+                        </div>
+                        <div class="preview">
+                            <img>
+                            <i class="close">Close</i>
+                        </div>
+                    </div>
+                    <div class="author">
+                        <label for="">Author</label>
+                        <select 
+                        name="author"
+                    
+                        
+                        >
+                            <option value="<%= blog.author %>" selected> <%= blog.author %></option>
+                            <option value="chile">Chile</option>
+                            <option value="ade">Ade</option>
+                            <option value="praise">Praise</option>
+                            <option value="robert">Robert</option>
+                            <option value="seth">Seth</option>
+                        </select>
+                    </div>
+                    <div class="btn">
+                        <button name="update" value="<%= blog._id %>" >Update Blog</button>
+                    </div>
+                </form>
+
+
+            </div>
+            <%- include("./partials/footer.ejs")%>
+                <script>
+                    let img = document.querySelector('input[type="file"]');
+                    let prev = document.querySelector('.preview img');
+                    let closes = document.querySelector('.preview .close');
+                    // console.log(prev);
+                    // console.log(img);
+
+                    closes.addEventListener('click', (e) => {
+                        prev.style.display = 'none';
+                        closes.style.display = 'none';
+                    })
+
+                    img.addEventListener('change', (e) => {
+                        // console.log(e.target.files[0]);
+                        // console.log(URL.createObjectURL(e.target.files[0]));
+                        let fakeUrl = URL.createObjectURL(e.target.files[0]);
+                        prev.style.display = 'flex';
+                        closes.style.display = 'flex';
+                        prev.src = `${fakeUrl}`;
+                    })
+
+                   
+                </script>
+    </body>
+
+</html>
